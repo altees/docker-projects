@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: discovery-service
+server:
+  port: 9000
+logging:
+  level:
+    root: INFO
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: 172.17.240.1
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/

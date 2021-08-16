@@ -1,0 +1,31 @@
+version: "3"
+services:
+  discovery:
+    image: discovery-service
+    ports:
+      - "9000:9000"
+    networks:
+      - testNetwork
+
+  product:
+    image: product-service
+    ports:
+      - "8585:8585"
+    networks:
+      - testNetwork
+  user:
+    image: user-service
+    ports:
+      - "8181:8181"
+    networks:
+      - testNetwork
+
+  mongoDB:
+    image: mongo
+    ports:
+      - "4000:27017"
+    networks:
+      - testNetwork
+
+networks:
+  testNetwork:

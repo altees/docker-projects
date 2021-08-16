@@ -1,0 +1,17 @@
+package com.alt.discovery;
+
+import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.junit.Assert.assertTrue;
+
+@SpringBootTest
+public class DiscoveryServiceApplicationTests {
+
+	@Test
+	public void shouldAnswerWithTrue()
+	{
+		assertTrue( true );
+	}
+
+}
