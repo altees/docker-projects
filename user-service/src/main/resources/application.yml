@@ -9,6 +9,14 @@ spring:
       host: mongoDB
       port: 27017
 
+  kafka:
+    consumer:
+      bootstrap-server: localhost:9092
+      group-id: alteesGroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
 server:
   port: 8181
 

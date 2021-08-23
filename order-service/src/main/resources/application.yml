@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: order-service
+
+server:
+  port: 8183
+
+  kafka:
+    consumer:
+      bootstrap-server: localhost:9092
+      group-id: alteesGroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+logging:
+  level:
+    root: INFO
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka/
+

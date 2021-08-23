@@ -7,6 +7,15 @@ spring:
       authenticationDatabase: admin
       host: mongoDB
       port: 27017
+
+  kafka:
+    consumer:
+      bootstrap-server: localhost:9092
+      group-id: alteesGroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
 server:
   port: 8585
 logging:
@@ -19,4 +28,4 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://discovery:9000/eureka/
+      defaultZone: http://localhost:9000/eureka/
