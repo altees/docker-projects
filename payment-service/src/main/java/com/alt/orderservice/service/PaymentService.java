@@ -1,4 +1,4 @@
-package com.alt.paymentservice.service;
+package com.alt.orderservice.service;
 
 public interface PaymentService {
 
