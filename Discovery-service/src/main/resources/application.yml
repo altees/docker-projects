@@ -9,7 +9,7 @@ logging:
 eureka:
   instance:
     prefer-ip-address: true
-    hostname: 172.17.240.1
+    hostname: localhost
   client:
     registerWithEureka: false
     fetchRegistry: false
