@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(value = "http://localhost:3000")
@@ -27,11 +28,10 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public List<Product> getProducts(){
+    public List<Product> getProducts(){ log.trace("Request received at controller");
 
-        System.out.println("Request received at controller");
-
-
+          //
+         //
         return productService.getProducts();
     }
 

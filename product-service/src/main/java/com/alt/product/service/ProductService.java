@@ -10,9 +10,9 @@ import java.util.List;
 public interface ProductService {
     Product saveProduct(Product product);
 
-    List<Product> getProducts();
-
     Product getProduct(String productName);
+
+    List<Product> getProducts();
 
     Page<Product> getProductsByPage(PaginationCriteria criteria);
 }
