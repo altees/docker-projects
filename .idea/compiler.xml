@@ -7,15 +7,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="product-service" />
         <module name="Discovery-service" />
-        <module name="user-service" />
         <module name="payment-service" />
-        <module name="order-service" />
         <module name="edge-service" />
+        <module name="AccountMS" />
+        <module name="product-service" />
+        <module name="user-service" />
+        <module name="order-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="AccountMS" target="1.8" />
       <module name="Discovery-service" target="1.8" />
       <module name="edge-service" target="1.8" />
       <module name="order-service" target="1.8" />
@@ -26,6 +28,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="AccountMS" options="-parameters" />
       <module name="Discovery-service" options="-parameters" />
       <module name="edge-service" options="-parameters" />
       <module name="order-service" options="-parameters" />

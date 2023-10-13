@@ -5,7 +5,7 @@ spring:
     mongodb:
       database: altees
       authenticationDatabase: admin
-      host: mongoDB
+      host: localhost
       port: 27017
 
   kafka:

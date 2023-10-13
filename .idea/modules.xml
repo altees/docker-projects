@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/AccountMS/AccountMS.iml" filepath="$PROJECT_DIR$/AccountMS/AccountMS.iml" />
       <module fileurl="file://$PROJECT_DIR$/Discovery-service/Discovery-service.iml" filepath="$PROJECT_DIR$/Discovery-service/Discovery-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/dockerProject.iml" filepath="$PROJECT_DIR$/.idea/dockerProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/edge-service/edge-service.iml" filepath="$PROJECT_DIR$/edge-service/edge-service.iml" />

@@ -7,14 +7,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.function.ServerRequest;
+import org.springframework.web.servlet.function.ServerResponse;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(value = "http://localhost:3000")
-@RequestMapping("/admin")
 @Slf4j
+@RequestMapping("/product")
 public class ProductController {
 
     @Autowired
@@ -25,6 +26,12 @@ public class ProductController {
     public Product saveProduct(@RequestBody Product product){
         return productService.saveProduct(product);
 
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        System.out.println("Request coming");
+        return "Test From product Service";
     }
 
     @GetMapping("/products")

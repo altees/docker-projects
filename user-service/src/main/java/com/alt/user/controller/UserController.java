@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
 @Slf4j
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     ProductFeignClient productFeignClient;
@@ -23,6 +23,11 @@ public class UserController {
 
     private User registerUer(User user) {
         return userService.registerUser(user);
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        return "Test From user Service";
     }
 
     @GetMapping("/products")

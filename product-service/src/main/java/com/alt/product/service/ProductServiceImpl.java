@@ -39,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProduct(String productName) {
         Product byProductName = productRepository.findByProductName(productName);
-        byProductName.setPortNo(Integer.parseInt(environment.getProperty("server.port")));
+       // byProductName.setPortNo(Integer.parseInt(environment.getProperty("server.port")));
         return byProductName;
     }
 
