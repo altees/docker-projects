@@ -1,5 +1,6 @@
 package com.altees.edgeservice.filters;
 
+import com.altees.edgeservice.exception.AutheticationRequiredException;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
@@ -21,7 +22,7 @@ public class AuthenticationPreFilter extends AbstractGatewayFilterFactory<Authen
 
             if (!CollectionUtils.isEmpty(headers.get("auth")) && "granted".equalsIgnoreCase(headers.get("auth").get(0)))
                 return chain.filter(exchange);
-            throw new RuntimeException("Authentication Required");
+            throw new AutheticationRequiredException("Authentication Required");
         };
     }
 

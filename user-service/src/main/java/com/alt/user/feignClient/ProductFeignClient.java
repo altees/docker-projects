@@ -8,7 +8,7 @@ import java.util.List;
 @FeignClient("product-service")
 public interface ProductFeignClient {
 
-    @GetMapping("/admin/products")
+    @GetMapping("/product/products")
     public List<Product> getProducts();
 
 }
