@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @ToString
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column("userId")
     private String userId;
     @Column("firstName")
@@ -60,21 +59,24 @@ public class User {
     private boolean isFreshAddressValidated;
     @Column("organizationUnitId")
     private String organizationUnitId;
+    @Column("salt")
+    private String salt;
+
 
     public User() {
         // Default constructor
     }
 
-    public User(String firstName, String lastName, String email,String password, int loginAttempt,
+    public User(String firstName, String lastName, String email, String password, int loginAttempt,
                 boolean subscribed, boolean isActive, String passwordResetOn, String signOutOn,
                 String inActivatedOn, String dateOfBirth, String monthOfBirth, String storeId,
                 String shoppingFor, String aboutUs, String accountType, String groupType,
                 LocalDateTime updatedDate, LocalDateTime createdDate, boolean isFreshAddressValidated,
-                String organizationUnitId) {
+                String organizationUnitId, String salt) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password=password;
+        this.password = password;
         this.loginAttempt = loginAttempt;
         this.subscribed = subscribed;
         this.isActive = isActive;
@@ -92,6 +94,7 @@ public class User {
         this.createdDate = createdDate;
         this.isFreshAddressValidated = isFreshAddressValidated;
         this.organizationUnitId = organizationUnitId;
+        this.salt = salt;
     }
 
 }

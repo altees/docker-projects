@@ -7,6 +7,7 @@ import reactor.core.publisher.Mono;
 
 public interface UserRepository extends ReactiveCrudRepository<User, String> {
 
-    @Query("SELECT * FROM account WHERE email = :email")
     Mono<User> findByEmail(String email);
+
+    Mono<User> findByUserId(String userId);
 }

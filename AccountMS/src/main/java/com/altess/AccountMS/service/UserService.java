@@ -26,7 +26,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-   // private final RequestValidator requestValidator;
+    // private final RequestValidator requestValidator;
 
     @Autowired
     public UserService(UserRepository userRepository) {
@@ -35,7 +35,7 @@ public class UserService {
     }
 
     public Mono<ResponseEntity<BaseResponse>> saveUser(SignUpByEmailRequest signUpRequest) {
-      //  requestValidator.validateJsonRequest(signUpRequest);
+        //  requestValidator.validateJsonRequest(signUpRequest);
         return userRepository.findByEmail(signUpRequest.getEmail())
                 .flatMap(user -> {
                     // User already exists, log the error and return a BadRequest response
@@ -45,9 +45,10 @@ public class UserService {
                 }).switchIfEmpty(Mono.defer(() -> {
                     // Proceed with user creation
                     //  freshAddressValidationForEmail();  we will do later
-                    String hashedPassword = PasswordHasher.hashPassword(signUpRequest.getPassword(), PasswordHasher.generateSalt());
+                    String salt = PasswordHasher.generateSalt();
+                    String hashedPassword = PasswordHasher.hashPassword(signUpRequest.getPassword(), salt);
                     signUpRequest.setPassword(hashedPassword);
-                    User user = UserHelper.toUser(signUpRequest);
+                    User user = UserHelper.toUser(signUpRequest,salt);
                     return userRepository.save(user)
                             .map(savedUser -> {
                                 //sendConfirmationEmail(savedUser); // will do later
@@ -59,13 +60,17 @@ public class UserService {
 
     }
 
+    public Mono<User> findByUsername(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     private Mono<? extends ResponseEntity<BaseResponse>> createUser(SignUpByEmailRequest signUpRequest) {
         return null;
     }
 
 
     public Mono<User> getBMUser(String userId) {
-        return userRepository.findById(userId);
+        return userRepository.findByUserId(userId);
     }
 
     public Flux<User> getAllBMUsers() {
