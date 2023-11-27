@@ -49,16 +49,16 @@ public class UserService {
                     return Mono.just(ResponseEntity.badRequest().body(errorDetails));
                 }).switchIfEmpty(Mono.defer(() -> {
                     // Proceed with user creation
-                    //  freshAddressValidationForEmail();  we will do later
+                    //  validationForEmail  we will do later
                     String salt = PasswordHasher.generateSalt();
                     String hashedPassword = PasswordHasher.hashPassword(signUpRequest.getPassword(), salt);
                     signUpRequest.setPassword(hashedPassword);
                     User user = UserHelper.toUser(signUpRequest, salt);
                     return userRepository.save(user)
                             .map(savedUser -> {
-                                //sendConfirmationEmail(savedUser); // will do later
-                                //pulishKafkaMessage(savedUser); // will do later
-                                BaseResponse response = new UserCreatedResponse(savedUser.getUserId(), ZonedDateTime.now().toLocalDateTime().toString(), HttpStatus.CREATED.value(), Constants.SIGN_UP_IS_SUCCESSFUL, "");
+                                //sendConfirmationEmail; // will do later
+                                //pulishKafkaMessage; // will do later
+                                BaseResponse response = new UserCreatedResponse(savedUser.getUserId(), ZonedDateTime.now().toLocalDateTime().toString(), HttpStatus.CREATED.value(), Constants.SIGN_UP_IS_SUCCESSFUL, null);
                                 return ResponseEntity.accepted().body(response);
                             });
                 }));

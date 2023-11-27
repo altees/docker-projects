@@ -1,5 +1,6 @@
 package com.altess.AccountMS.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 
@@ -8,6 +9,7 @@ import java.time.Instant;
 @JsonDeserialize
 @Data
 public class ErrorResponse extends BaseResponse{
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "IST")
     private Instant timestamp;
     private int status;
     private String error;
