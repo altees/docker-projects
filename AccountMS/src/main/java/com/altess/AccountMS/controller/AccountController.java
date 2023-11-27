@@ -15,6 +15,8 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/bmusers")
 public class AccountController {
+
+
     private final UserService userService;
 
     @Autowired
@@ -23,8 +25,8 @@ public class AccountController {
     }
 
     @PostMapping
-    public Mono<ResponseEntity<BaseResponse>> saveUser(@RequestBody @Valid SignUpByEmailRequest singUpRequest) {
-        return userService.saveUser(singUpRequest);
+    public Mono<ResponseEntity<BaseResponse>> saveUser(@Valid @RequestBody Mono<SignUpByEmailRequest> singUpRequest) {
+        return singUpRequest.flatMap(request -> userService.saveUser(request));
     }
 
     @GetMapping("/{userId}")

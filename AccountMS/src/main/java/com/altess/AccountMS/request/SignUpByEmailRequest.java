@@ -5,11 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.Valid;
 import javax.validation.constraints.*;
-import java.util.Optional;
 
-@Valid
 @Getter
 @Setter
 @AllArgsConstructor

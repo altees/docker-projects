@@ -10,6 +10,7 @@ import com.altess.AccountMS.utils.PasswordHasher;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,11 +27,6 @@ public class AuthenticationREST {
     private PBKDF2Encoder passwordEncoder;
     private UserService userService;
 
-
-    @GetMapping("/test")
-    public Mono<ResponseEntity<String>> test() {
-        return Mono.just(ResponseEntity.ok("test"));
-    }
 
     @PostMapping("/login")
     public Mono<ResponseEntity<AuthResponse>> login(@RequestBody AuthRequest ar) {

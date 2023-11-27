@@ -1,24 +1,26 @@
-/*
+
 package com.altess.AccountMS.utils;
 
 import com.altess.AccountMS.request.BaseRequest;
 import io.vavr.control.Option;
 import org.springframework.stereotype.Component;
 
-import javax.validation.*;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import java.util.Set;
 
 @Component
+
 public class RequestValidator {
 
-    private static final Validator validator;
 
-    static {
-        Configuration<?> config = Validation.byDefaultProvider().configure();
-        ValidatorFactory factory = config.buildValidatorFactory();
-        validator = factory.getValidator();
-        factory.close();
+    public RequestValidator() {
+        this.validator = Validation.buildDefaultValidatorFactory().getValidator();
     }
+
+    Validator validator;
 
 
     public void validateJsonRequest(BaseRequest request) {
@@ -33,5 +35,23 @@ public class RequestValidator {
                     throw new ConstraintViolationException(violations);
                 });
     }
+
+    /*public void validateRequest(BaseRequest request) {
+        Errors errors = new BeanPropertyBindingResult(request, "request");
+        validator.validate(request, errors);
+
+        if (errors.hasErrors()) {
+            // Handle validation errors
+            Option.of(errors.getFieldErrors())
+                    .filter(fieldErrors -> fieldErrors.size()<=0)
+                    .getOrElse(()->{
+                        throw new ConstraintViolationException(errors.getFieldErrors());
+                    });
+            // You can throw an exception or handle errors as needed
+        } else {
+            // Proceed with valid object
+            System.out.println("Request is valid");
+        }
+    }*/
 }
-*/
+

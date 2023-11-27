@@ -37,7 +37,7 @@ public class WebSecurityConfig {
                 .pathMatchers(HttpMethod.POST,"/role").permitAll()
                 .pathMatchers("/roles").permitAll()
                 .pathMatchers("/api/bmusers").permitAll()
-                .pathMatchers(HttpMethod.GET,"/api/bmusers/*").permitAll()
+                .pathMatchers(HttpMethod.GET,"/api/bmusers/**").permitAll()
                 .anyExchange().authenticated()
                 .and().build();
     }

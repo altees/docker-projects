@@ -8,9 +8,12 @@ import com.altess.AccountMS.response.BaseResponse;
 import com.altess.AccountMS.response.ErrorResponse;
 import com.altess.AccountMS.response.UserCreatedResponse;
 import com.altess.AccountMS.utils.PasswordHasher;
+import com.altess.AccountMS.utils.RequestValidator;
 import com.altess.AccountMS.utils.UserHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -26,16 +29,18 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    // private final RequestValidator requestValidator;
+    private RequestValidator requestValidator;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RequestValidator requestValidator) {
         this.userRepository = userRepository;
-
+        this.requestValidator = requestValidator;
     }
 
+
+    @CacheEvict(cacheNames = "bmusers",allEntries = true)
     public Mono<ResponseEntity<BaseResponse>> saveUser(SignUpByEmailRequest signUpRequest) {
-        //  requestValidator.validateJsonRequest(signUpRequest);
+       // requestValidator.validateJsonRequest(signUpRequest);
         return userRepository.findByEmail(signUpRequest.getEmail())
                 .flatMap(user -> {
                     // User already exists, log the error and return a BadRequest response
@@ -48,7 +53,7 @@ public class UserService {
                     String salt = PasswordHasher.generateSalt();
                     String hashedPassword = PasswordHasher.hashPassword(signUpRequest.getPassword(), salt);
                     signUpRequest.setPassword(hashedPassword);
-                    User user = UserHelper.toUser(signUpRequest,salt);
+                    User user = UserHelper.toUser(signUpRequest, salt);
                     return userRepository.save(user)
                             .map(savedUser -> {
                                 //sendConfirmationEmail(savedUser); // will do later
@@ -73,7 +78,14 @@ public class UserService {
         return userRepository.findByUserId(userId);
     }
 
+    @Cacheable("bmusers")
     public Flux<User> getAllBMUsers() {
+        try {
+            Thread.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("callingDB");
         return userRepository.findAll();
     }
 
